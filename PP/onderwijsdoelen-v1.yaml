@@ -1,0 +1,939 @@
+---
+swagger: "2.0"
+info:
+  title: "Onderwijsdoelen van het Vlaamse onderwijs"
+  description: "Met deze onderwijsdoelen-api kan je raadplegen welke onderwijsdoelen\
+    \ geldig zijn binnen het leerplichtonderwijs, het volwassenenonderwijs, het deeltijds\
+    \ kunstonderwijs en in de lerarenopleiding. Een onderwijsdoel is een overkoepelend\
+    \ begrip waarmee wordt verwezen naar basiscompetenties, eindtermen, eindtermen\
+    \ basisgeletterdheid, ontwikkelingsdoelen, cesuurdoelen, specifieke eindtermen\
+    \ en uitbreidingsdoelen. Elk onderwijsdoel beschrijft wat je minimaal moet verwerven\
+    \ om je persoonlijk te ontwikkelen, aan de maatschappij deel te nemen of door\
+    \ te stromen naar hoger onderwijs."
+  contact:
+    name: "AHOVOKS"
+  license:
+    name: "Modellicentie Gratis Hergebruik"
+    url: "https://overheid.vlaanderen.be/sites/default/files/documenten/ict-egov/licenties/hergebruik/modellicentie_gratis_hergebruik_v1_0.html"
+  version: "1.0"
+host: "onderwijs.api.vlaanderen.be"
+basePath: "/onderwijsdoelen"
+schemes:
+- "https"
+securityDefinitions:
+  apikey:
+    type: "apiKey"
+    in: "header"
+    name: "x-api-key"
+security:
+- apikey: []
+produces:
+- "application/json"
+parameters:
+  paginanr:
+    name: "paginanr"
+    in: "query"
+    description: "paginanummer voor paginatie"
+    default: 1
+    type: "number"
+    required: false
+  indeling:
+    name: "indeling"
+    in: "query"
+    description: "indeling"
+    type: "string"
+    required: false
+  europese_sleutelcompetentie:
+    name: "europese_sleutelcompetentie"
+    in: "query"
+    description: "europese sleutelcompetentie"
+    type: "string"
+    required: false
+  vwo_so_gr3_onderwijsvorm:
+    name: "vwo_so_gr3_onderwijsvorm"
+    in: "query"
+    description: "Secundair volwassenonderwijs 3de graad onderwijsvorm: bvb.:  \"\
+      aso\", \"bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  vwo_so_gr2_onderwijsvorm:
+    name: "vwo_so_gr2_onderwijsvorm"
+    in: "query"
+    description: "Secundair volwassenonderwijs 2de graad onderwijsvorm: bvb.:  \"\
+      aso\", \"bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  so_gr3_lj3_onderwijsvorm:
+    name: "so_gr3_lj3_onderwijsvorm"
+    in: "query"
+    description: "Secundair onderwijs 3de graad - 3de leerjaar onderwijsvorm: bvb.:\
+      \  \"aso\", \"bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  buso_gr3_lj3_onderwijsvorm:
+    name: "buso_gr3_lj3_onderwijsvorm"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - 3de graad\
+      \ - 3de leerjaar onderwijsvorm: bvb.:  \"aso\", \"bso\", \"kso\", \"tso\", \"\
+      dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  vwo_onderwijs_subniveau:
+    name: "vwo_onderwijs_subniveau"
+    in: "query"
+    description: "Volwassenonderwijs subniveau bvb.: (\"Buitengewoon\")\"Kleuteronderwijs\"\
+      , \"Lager Onderwijs\", \"Basiseducatie\", \"Secundair Volwassenonderwijs\""
+    type: "string"
+    required: false
+  ho_onderwijs_subniveau:
+    name: "ho_onderwijs_subniveau"
+    in: "query"
+    description: "Hoger onderwijs subniveau bvb.:  (\"Buitengewoon\")\"Kleuteronderwijs\"\
+      , \"Lager Onderwijs\", \"Basiseducatie\", \"Secundair Volwassenonderwijs\""
+    type: "string"
+    required: false
+  bo_onderwijs_subniveau:
+    name: "bo_onderwijs_subniveau"
+    in: "query"
+    description: "basisonderwijs subniveau bvb.: (\"Buitengewoon\")\"Kleuteronderwijs\"\
+      , \"Lager Onderwijs\", \"Basiseducatie\", \"Secundair Volwassenonderwijs\""
+    type: "string"
+    required: false
+  so_gr3_lj3_finaliteit:
+    name: "so_gr3_lj3_finaliteit"
+    in: "query"
+    description: "Secundair onderwijs 3de graad - 3de leerjaar finaliteit: bvb.: \"\
+      Finaliteit doorstroom\", \"Dubbele finaliteit\", \"Finaliteit arbeidsmarkt\""
+    type: "string"
+    required: false
+  so_gr3_onderwijsvorm:
+    name: "so_gr3_onderwijsvorm"
+    in: "query"
+    description: "Secundair onderwijs 3de graad onderwijsvorm: bvb.:  \"aso\", \"\
+      bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  so_gr2_onderwijsvorm:
+    name: "so_gr2_onderwijsvorm"
+    in: "query"
+    description: "Secundair onderwijs 2de graad onderwijsvorm: bvb.:  \"aso\", \"\
+      bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  buso_gr3_lj3_finaliteit:
+    name: "buso_gr3_lj3_finaliteit"
+    in: "query"
+    description: "Secundair onderwijs 3de graad - 3de leerjaar finaliteit: bvb.: \"\
+      Finaliteit doorstroom\", \"Dubbele finaliteit\", \"Finaliteit arbeidsmarkt\""
+    type: "string"
+    required: false
+  buso_gr3_onderwijsvorm:
+    name: "buso_gr3_onderwijsvorm"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - 3de graad\
+      \ onderwijsvorm: bvb.:  \"aso\", \"bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  buso_gr2_onderwijsvorm:
+    name: "buso_gr2_onderwijsvorm"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - 2de graad\
+      \ onderwijsvorm: bvb.:  \"aso\", \"bso\", \"kso\", \"tso\", \"dbso\", \"leertijd\""
+    type: "string"
+    required: false
+  so_gr3_finaliteit:
+    name: "so_gr3_finaliteit"
+    in: "query"
+    description: "Secundair onderwijs 3de graad finaliteit: bvb.: \"Finaliteit doorstroom\"\
+      , \"Dubbele finaliteit\", \"Finaliteit arbeidsmarkt\""
+    type: "string"
+    required: false
+  so_gr2_finaliteit:
+    name: "so_gr2_finaliteit"
+    in: "query"
+    description: "Secundair onderwijs 2de graad finaliteit: bvb.: \"Finaliteit doorstroom\"\
+      , \"Dubbele finaliteit\", \"Finaliteit arbeidsmarkt\""
+    type: "string"
+    required: false
+  buso_gr3_finaliteit:
+    name: "buso_gr3_finaliteit"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - 3de graad\
+      \ finaliteit: bvb.: \"Finaliteit doorstroom\", \"Dubbele Finaliteit\", \"Finaliteit\
+      \ arbeidsmarkt\""
+    type: "string"
+    required: false
+  buso_gr2_finaliteit:
+    name: "buso_gr2_finaliteit"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - 2de graad\
+      \ finaliteit: bvb.: \"Finaliteit doorstroom\", \"Dubbele finaliteit\", \"Finaliteit\
+      \ arbeidsmarkt\""
+    type: "string"
+    required: false
+  blo_onderwijstype:
+    name: "blo_onderwijstype"
+    in: "query"
+    description: "Buitengewoon lager onderwijs onderwijstype: bvb.:  \"Type 1\", \"\
+      Type 2\", \"Type 7\", \"Type 8\""
+    type: "string"
+    required: false
+  bko_onderwijstype:
+    name: "bko_onderwijstype"
+    in: "query"
+    description: "Buitengewoon Kleuteronderwijs onderwijstype: bvb.:  \"Type 1\",\
+      \ \"Type 2\", \"Type 7\", \"Type 8\""
+    type: "string"
+    required: false
+  rijen_per_pagina:
+    name: "rijen_per_pagina"
+    in: "query"
+    description: "rijen per pagina van de paginatie"
+    default: 20
+    type: "number"
+    required: false
+  vwo_so_graad:
+    name: "vwo_so_graad"
+    in: "query"
+    description: "Secundair volwassenonderwijs graad: bvb.: \"1ste graad\", \"2de\
+      \ graad\", \"3de graad\", \"3de graad - 3de leerjaar\""
+    type: "string"
+    required: false
+  dko_graad:
+    name: "dko_graad"
+    in: "query"
+    description: "Deeltijds kunstonderwijs graad: bvb.: \"1ste graad\", \"2de graad\"\
+      , \"3de graad\", \"3de graad - 3de leerjaar\""
+    type: "string"
+    required: false
+  bouwsteen:
+    name: "bouwsteen"
+    in: "query"
+    description: "bouwsteen van een onderwijsdoel(~titel)"
+    type: "string"
+    required: false
+  wetenschapsdomein:
+    name: "wetenschapsdomein"
+    in: "query"
+    description: "Wetenschapsdomein van een onderwijsdoel(~titel)"
+    type: "string"
+    required: false
+  studierichting:
+    name: "studierichting"
+    in: "query"
+    description: "Studierichting van een onderwijsdoel"
+    type: "string"
+    required: false
+  so_graad:
+    name: "so_graad"
+    in: "query"
+    description: "Secundair onderwijs graad: bvb.: \"1ste graad\", \"2de graad\",\
+      \ \"3de graad\", \"3de graad - 3de leerjaar\""
+    type: "string"
+    required: false
+  buso_graad:
+    name: "buso_graad"
+    in: "query"
+    description: "Buitengewoon Secundair onderwijs - Opleidingsvorm 4 - graad: bvb.:\
+      \ \"1ste graad\", \"2de graad\", \"3de graad\", \"3de graad - 3de leerjaar\""
+    type: "string"
+    required: false
+  transversaal:
+    name: "transversaal"
+    in: "query"
+    description: "Ja/Nee indicator die bepaalt of de onderwijsdoel Transversaal is"
+    type: "string"
+    required: false
+    enum:
+    - "Ja"
+    - "Nee"
+  leergebiedoverschrijdend:
+    name: "leergebiedoverschrijdend"
+    in: "query"
+    description: "Ja/Nee indicator die bepaalt of de onderwijsdoel leergebiedoverschrijdend\
+      \ is"
+    type: "string"
+    required: false
+    enum:
+    - "Ja"
+    - "Nee"
+  versie:
+    name: "versie"
+    in: "query"
+    description: "versie vb. 1.0, 2.0"
+    type: "string"
+    required: false
+  zoek:
+    name: "zoek"
+    in: "query"
+    description: "zoeken in alle tekst"
+    type: "string"
+    required: false
+  aav:
+    name: "aav"
+    in: "query"
+    description: "aanvullende algemene vorming"
+    type: "string"
+    required: false
+  vlaamse_sleutelcompetentie:
+    name: "vlaamse_sleutelcompetentie"
+    in: "query"
+    description: "vlaamse_sleutelcompetentie"
+    type: "string"
+    required: false
+  onderwijsdoel_type:
+    name: "onderwijsdoel_type"
+    in: "query"
+    description: "onderwijsdoel_type"
+    type: "string"
+    required: false
+  vakoverschrijdend:
+    name: "vakoverschrijdend"
+    in: "query"
+    description: "vakoverschrijdende"
+    type: "string"
+    required: false
+  onderwijssoort:
+    name: "onderwijssoort"
+    in: "query"
+    description: "onderwijssoort"
+    type: "string"
+    required: false
+  attitudinaal:
+    name: "attitudinaal"
+    in: "query"
+    description: "Ja/Nee indicator die bepaalt of de onderwijsdoel een attitude is."
+    enum:
+    - "Ja"
+    - "Nee"
+    type: "string"
+    required: false
+  geldig:
+    name: "geldig"
+    in: "query"
+    description: "geldig"
+    type: "string"
+    required: false
+  stroom:
+    name: "stroom"
+    in: "query"
+    description: "stroom"
+    type: "string"
+    required: false
+  buso_stroom:
+    name: "buso_stroom"
+    in: "query"
+    description: "buso_stroom"
+    type: "string"
+    required: false
+  opleidingsvorm:
+    name: "opleidingsvorm"
+    in: "query"
+    description: "opleidingsvorm"
+    type: "string"
+    required: false
+  onderwijsniveau:
+    name: "onderwijsniveau"
+    in: "query"
+    description: "onderwijsniveau"
+    type: "string"
+    required: false
+paths:
+  /onderwijsdoel:
+    get:
+      summary: "Haalt onderwijsdoelen op adhv de gekozen parameters"
+      tags:
+      - "zoekresultaat"
+      parameters:
+      - $ref: "#/parameters/paginanr"
+      - $ref: "#/parameters/rijen_per_pagina"
+      - $ref: "#/parameters/versie"
+      - $ref: "#/parameters/zoek"
+      - $ref: "#/parameters/onderwijsniveau"
+      - $ref: "#/parameters/opleidingsvorm"
+      - $ref: "#/parameters/stroom"
+      - $ref: "#/parameters/buso_stroom"
+      - $ref: "#/parameters/onderwijssoort"
+      - $ref: "#/parameters/onderwijsdoel_type"
+      - $ref: "#/parameters/vlaamse_sleutelcompetentie"
+      - $ref: "#/parameters/geldig"
+      - $ref: "#/parameters/aav"
+      - $ref: "#/parameters/vakoverschrijdend"
+      - $ref: "#/parameters/bouwsteen"
+      - $ref: "#/parameters/europese_sleutelcompetentie"
+      - $ref: "#/parameters/attitudinaal"
+      - $ref: "#/parameters/transversaal"
+      - $ref: "#/parameters/leergebiedoverschrijdend"
+      - $ref: "#/parameters/so_gr3_lj3_finaliteit"
+      - $ref: "#/parameters/so_gr3_finaliteit"
+      - $ref: "#/parameters/so_gr2_finaliteit"
+      - $ref: "#/parameters/buso_gr3_lj3_finaliteit"
+      - $ref: "#/parameters/buso_gr3_finaliteit"
+      - $ref: "#/parameters/buso_gr2_finaliteit"
+      - $ref: "#/parameters/blo_onderwijstype"
+      - $ref: "#/parameters/bko_onderwijstype"
+      - $ref: "#/parameters/indeling"
+      - $ref: "#/parameters/vwo_so_graad"
+      - $ref: "#/parameters/dko_graad"
+      - $ref: "#/parameters/so_graad"
+      - $ref: "#/parameters/buso_graad"
+      - $ref: "#/parameters/vwo_so_gr3_onderwijsvorm"
+      - $ref: "#/parameters/vwo_so_gr2_onderwijsvorm"
+      - $ref: "#/parameters/so_gr3_lj3_onderwijsvorm"
+      - $ref: "#/parameters/so_gr3_onderwijsvorm"
+      - $ref: "#/parameters/so_gr2_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr3_lj3_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr3_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr2_onderwijsvorm"
+      - $ref: "#/parameters/ho_onderwijs_subniveau"
+      - $ref: "#/parameters/vwo_onderwijs_subniveau"
+      - $ref: "#/parameters/bo_onderwijs_subniveau"
+      - $ref: "#/parameters/wetenschapsdomein"
+      - $ref: "#/parameters/studierichting"
+      responses:
+        "200":
+          description: "gegevens"
+          schema:
+            type: "object"
+            properties:
+              gegevens:
+                type: "array"
+                items:
+                  $ref: "#/definitions/onderwijsdoel.object"
+            required:
+            - "gegevens"
+        "400":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+        "404":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+        "503":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+  /files/onderwijsdoel/xls/:
+    get:
+      summary: "Download van onderwijsdoelen in excel vorm op adhv de gekozen parameters"
+      produces:
+      - "application/vnd.ms-excel"
+      tags:
+      - "zoekresultaat"
+      parameters:
+      - $ref: "#/parameters/paginanr"
+      - $ref: "#/parameters/rijen_per_pagina"
+      - $ref: "#/parameters/versie"
+      - $ref: "#/parameters/zoek"
+      - $ref: "#/parameters/onderwijsniveau"
+      - $ref: "#/parameters/opleidingsvorm"
+      - $ref: "#/parameters/stroom"
+      - $ref: "#/parameters/buso_stroom"
+      - $ref: "#/parameters/onderwijssoort"
+      - $ref: "#/parameters/onderwijsdoel_type"
+      - $ref: "#/parameters/vlaamse_sleutelcompetentie"
+      - $ref: "#/parameters/geldig"
+      - $ref: "#/parameters/aav"
+      - $ref: "#/parameters/vakoverschrijdend"
+      - $ref: "#/parameters/bouwsteen"
+      - $ref: "#/parameters/europese_sleutelcompetentie"
+      - $ref: "#/parameters/attitudinaal"
+      - $ref: "#/parameters/transversaal"
+      - $ref: "#/parameters/leergebiedoverschrijdend"
+      - $ref: "#/parameters/so_gr3_lj3_finaliteit"
+      - $ref: "#/parameters/so_gr3_finaliteit"
+      - $ref: "#/parameters/so_gr2_finaliteit"
+      - $ref: "#/parameters/buso_gr3_lj3_finaliteit"
+      - $ref: "#/parameters/buso_gr3_finaliteit"
+      - $ref: "#/parameters/buso_gr2_finaliteit"
+      - $ref: "#/parameters/blo_onderwijstype"
+      - $ref: "#/parameters/bko_onderwijstype"
+      - $ref: "#/parameters/indeling"
+      - $ref: "#/parameters/vwo_so_graad"
+      - $ref: "#/parameters/dko_graad"
+      - $ref: "#/parameters/so_graad"
+      - $ref: "#/parameters/buso_graad"
+      - $ref: "#/parameters/vwo_so_gr3_onderwijsvorm"
+      - $ref: "#/parameters/vwo_so_gr2_onderwijsvorm"
+      - $ref: "#/parameters/so_gr3_lj3_onderwijsvorm"
+      - $ref: "#/parameters/so_gr3_onderwijsvorm"
+      - $ref: "#/parameters/so_gr2_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr3_lj3_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr3_onderwijsvorm"
+      - $ref: "#/parameters/buso_gr2_onderwijsvorm"
+      - $ref: "#/parameters/ho_onderwijs_subniveau"
+      - $ref: "#/parameters/vwo_onderwijs_subniveau"
+      - $ref: "#/parameters/bo_onderwijs_subniveau"
+      - $ref: "#/parameters/wetenschapsdomein"
+      - $ref: "#/parameters/studierichting"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            type: "file"
+            description: "excel bestand met onderwijsdoelen"
+        "400":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+        "404":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+        "503":
+          description: "fout"
+          schema:
+            type: "object"
+            description: "Er is een fout opgetreden"
+            properties:
+              error_code:
+                type: "string"
+              error_message:
+                type: "string"
+            required:
+            - "error_code"
+            - "error_message"
+definitions:
+  onderwijsniveau:
+    type: "string"
+    description: "Parameter die het onderwijsniveau aangeeft."
+    example: "Secundair onderwijs"
+    enum:
+    - "Basisonderwijs"
+    - "Secundair onderwijs"
+    - "Volwassenenonderwijs"
+    - "Deeltijds kunstonderwijs"
+    - "Hoger onderwijs"
+  onderwijs_subniveau:
+    type: "string"
+    example: "Kleuteronderwijs"
+    enum:
+    - "Kleuteronderwijs"
+    - "Lager onderwijs"
+    - "Buitengewoon Kleuteronderwijs"
+    - "Buitengewoon Lager Onderwijs"
+    - "Basiseducatie"
+    - "Secundair Volwassenonderwijs"
+  onderwijssoort:
+    type: "string"
+    description: "Parameter die gebruikt wordt in combinatie met `onderwijsniveau`\
+      \ Secundair onderwijs om aan te geven of het over buitengewoon onderwijs gaat\
+      \ of niet."
+    example: "Buitengewoon Secundair"
+    enum:
+    - "Buitengewoon Secundair"
+    - "Secundair"
+  opleidingsvorm:
+    type: "string"
+    description: "Parameter die gebruikt wordt in combinatie `onderwijsniveau` Secundair\
+      \ onderwijs > `onderwijssoort`: Buitengewoon Secundair."
+    example: "Opleidingsvorm 1,Opleidingsvorm 2,Opleidingsvorm 3"
+    enum:
+    - "Opleidingsvorm 1"
+    - "Opleidingsvorm 2"
+    - "Opleidingsvorm 3"
+    - "Opleidingsvorm 4"
+  graad:
+    type: "string"
+    example: "1ste graad"
+    enum:
+    - "1ste graad"
+    - "2de graad"
+    - "3de graad"
+    - "3de graad - 3de leerjaar"
+  finaliteit:
+    type: "string"
+    example: "Dubbele finaliteit"
+    enum:
+    - "Dubbele finaliteit"
+    - "Finaliteit doorstroom"
+    - "Finaliteit arbeidsmarkt"
+  onderwijsdoel.object:
+    type: "object"
+    description: "hoofdquery voor het ophalen van onderwijsdoelen"
+    properties:
+      code:
+        type: "string"
+        description: "Nummer/code die gebruikt wordt voor het onderwijsdoel"
+        example: "10.1.1"
+      omschrijving:
+        type: "string"
+        description: "De omschrijving van het onderwijsdoel"
+        example: "<p>De leerlingen onderzoeken complexe interacties in en met het\
+          \ systeem aarde.</p"
+      attitude:
+        type: "integer"
+        description: "Attitudinaal? 1 = Ja, 0 = Nee"
+        example: 0
+        enum:
+        - 0
+        - 1
+      transversaal:
+        type: "string"
+        description: "Transversaal"
+        example: "Specifieke Inhoud"
+        enum:
+        - "Specifieke Inhoud"
+        - "Transversaal"
+      tekstkenmerken:
+        type: "string"
+        example: "<p>Met inbegrip van kenmerken beluisterde en gelezen teksten</p><ul><li>Eenvoudig..."
+      context:
+        type: "string"
+        example: "* Voorbeelden van het systeem aarde"
+      procedurele_kennis:
+        type: "string"
+        example: "- Systeemdenken\r\n- Gebruiken van geografische hulpbronnen en terreinte..."
+      conceptuele_kennis:
+        type: "string"
+        example: "- Systeem aarde: atmosfeer, hydrosfeer, cryosfeer, lithosfeer, biosfeer\
+          \ en de..."
+      metacognitieve_kennis:
+        type: "string"
+        example: "- Eigen gedachten en gevoelens"
+      affectieve_dimensie:
+        type: "string"
+        example: "Reageren op opvattingen, gedrag, gebeurtenissen, informatie, taken,\
+          \ stratege..."
+      cognitieve_dimensie:
+        type: "string"
+        example: "beheersingsniveau analyseren"
+      psychomotorische_dimensie:
+        type: "string"
+        example: "Een vaardigheid uitvoeren na instructie of uit het geheugen: de\
+          \ meest ..."
+      feitenkennis:
+        type: "string"
+        example: "- Atmosfeer, hydrosfeer, cryosfeer, lithosfeer, biosfeer\r\n- Positieve\
+          \ en negatiev..."
+      onderwijsdoel_type:
+        type: "string"
+        description: "Het type onderwijsdoel"
+        example: "Specifieke eindtermen"
+        enum:
+        - "Basiscompetenties"
+        - "Cesuurdoelen"
+        - "Eindtermen"
+        - "Eindtermen basisgeletterdheid"
+        - "Ontwikkelingsdoelen"
+        - "Specifieke eindtermen"
+        - "Uitbreidingsdoelen"
+      geldigheid:
+        $ref: "#/definitions/geldigheid.object"
+      onderwijsdoelenset:
+        $ref: "#/definitions/onderwijsdoelenset.object"
+      onderwijsdoel_pretekst:
+        type: "string"
+        example: "<p>Cursisten nemen verschillende rollen op zich die aan algemene..."
+      onderwijsdoel_bijlage:
+        type: "string"
+        example: "Voor het realiseren van bovenstaande eindtermen gelden volgende\
+          \ begripsom..."
+      titels:
+        $ref: "#/definitions/titels.object"
+    required:
+    - "code"
+    - "omschrijving"
+    - "attitude"
+    - "transversaal"
+    - "geldigheid"
+    - "onderwijsdoelenset"
+    - "onderwijsdoel_type"
+    - "onderwijsdoel_pretekst"
+    - "onderwijsdoel_bijlage"
+    - "titels"
+    - "onderwijsstructuur"
+  geldigheid.object:
+    type: "object"
+    description: "geldigheid"
+    properties:
+      type:
+        type: "string"
+      geldig_van_dt:
+        type: "string"
+      geldig_tot_dt:
+        type: "string"
+      publicatie_dt:
+        type: "string"
+    required:
+    - "type"
+    - "publicatie_dt"
+  onderwijsdoelenset.object:
+    type: "object"
+    description: "onderwijsdoelenset"
+    properties:
+      onderwijsdoelenset:
+        type: "string"
+        description: "De omschrijving van de doelset combinatie"
+        example: "Secundair onderwijs 3de graad -  Aardwetenschappen - Specifieke\
+          \ eindtermen"
+      heeft_uitgangspunten:
+        type: "boolean"
+        description: "Heeft de onderwijsdoelenset uitgangspunten? 'true' = Ja, 'false'\
+          \ = nee"
+        example: false
+        enum:
+        - true
+        - false
+      uitgangspunten:
+        type: "string"
+        description: "API endpoint naar de uitgangspunten van de onderwijsdoelenset"
+      versie:
+        type: "string"
+        description: "Versie van de onderwijsdoelen, 1.0 zijn de oude eindtermen,\
+          \ 2.0 zijn de nieuwe eindtermen."
+        example: "2.0"
+        enum:
+        - "1.0"
+        - "2.0"
+      set_tekst:
+        type: "string"
+        description: "De tekst die bij een onderwijsdoelenset hoort"
+        example: "<p>De eindtermen onder de sleutelcompetenties &lsquo;Leercompetenties\
+          \ met inbeg...</p>"
+      aanvullend_bijkomend:
+        type: "string"
+        example: "Aanvullende"
+        enum:
+        - "Aanvullende"
+        - "Bijkomende"
+      vlaamse_sleutelcompetentie:
+        $ref: "#/definitions/vlaamse_sleutelcompetentie.object"
+      wetenschapsdomein:
+        $ref: "#/definitions/wetenschapsdomein.object"
+      onderwijsstructuur:
+        $ref: "#/definitions/onderwijsstructuur.object"
+      indeling_onderwijsdoelen:
+        $ref: "#/definitions/indeling_onderwijsdoelen.object"
+      indeling_opleidingsprofiel:
+        type: "string"
+        example: "Nederlands Doorstroom"
+    required:
+    - "onderwijsdoelenset"
+    - "heeft_uitgangspunten"
+    - "heeft_algemene_uitgangspunten"
+    - "versie"
+    - "aanvullend_bijkomend"
+  vlaamse_sleutelcompetentie.object:
+    type: "object"
+    properties:
+      korte_naam:
+        type: "string"
+        description: "De korte naam van een vlaamse sleutelcompetentie"
+        example: "Burgerschap"
+      naam:
+        type: "string"
+        description: "De volledige naam van een vlaamse sleutelcompetentie"
+        example: "Burgerschapscompetenties met inbegrip van competenties inzake samenleven"
+      nr:
+        type: "string"
+        description: "De nummer/code van een vlaamse sleutelcompetentie"
+        example: "7"
+  wetenschapsdomein.object:
+    type: "object"
+    properties:
+      korte_naam:
+        type: "string"
+        description: "De korte naam van een wetenschapsdomein"
+        example: "Aardwetenschappen"
+      naam:
+        type: "string"
+        description: "De volledige naam van een wetenschapsdomein"
+        example: "Aardwetenschappen"
+      nr:
+        type: "string"
+        description: "De nummer/code van een wetenschapsdomein"
+        example: "wd10"
+  onderwijsstructuur.object:
+    type: "object"
+    description: "Een onderwijsstructuur uit het onderwijsaanbod"
+    properties:
+      onderwijsniveau:
+        $ref: "#/definitions/onderwijsniveau"
+      onderwijssoort:
+        $ref: "#/definitions/onderwijssoort"
+      onderwijs_subniveau:
+        $ref: "#/definitions/onderwijs_subniveau"
+      graad:
+        $ref: "#/definitions/graad"
+      leerjaar:
+        type: "string"
+        example: "3de leerjaar"
+        enum:
+        - "3de leerjaar"
+      stroom:
+        type: "string"
+        example: "A-stroom"
+        enum:
+        - "A-stroom"
+        - "B-stroom"
+      finaliteit:
+        $ref: "#/definitions/finaliteit"
+      onderwijsvorm:
+        type: "string"
+        description: "Parameter die gebruikt wordt in combinatie met `onderwijsniveau`\
+          \ Secundair onderwijs."
+        example: "aso"
+        enum:
+        - "aso"
+        - "bso"
+        - "tso"
+        - "kso"
+      onderwijsvormen:
+        type: "array"
+        items:
+          $ref: "#/definitions/onderwijsvorm.object"
+      onderwijstype:
+        type: "string"
+        example: "Type 2"
+        enum:
+        - "Type 1"
+        - "Type 2"
+        - "Type 7"
+        - "Type 8"
+        - "Basisaanbod"
+      opleidingsvorm:
+        $ref: "#/definitions/opleidingsvorm"
+      algemene_vorming:
+        type: "string"
+        example: "Aanvullende Algemene Vorming Verbreding"
+        enum:
+        - "Aanvullende Algemene Vorming Minimum"
+        - "Aanvullende Algemene Vorming Verbreding"
+      heeft_algemene_uitgangspunten:
+        type: "boolean"
+        example: false
+        enum:
+        - true
+        - false
+      algemene_uitgangspunten:
+        type: "string"
+        description: "API endpoint naar algemene uitgangspunten"
+    required:
+    - "omschrijving"
+  onderwijsvorm.object:
+    type: "object"
+    properties:
+      waarde:
+        type: "string"
+        example: "aso"
+        enum:
+        - "aso"
+        - "bso"
+        - "tso"
+        - "kso"
+  titel.object:
+    type: "object"
+    description: "titel"
+    properties:
+      titel:
+        type: "string"
+      nr:
+        type: "string"
+      pretekst:
+        type: "string"
+      bijlage:
+        type: "string"
+      ordeningskader:
+        $ref: "#/definitions/ordeningskader.object"
+    required:
+    - "titel"
+    - "nr"
+  indeling_onderwijsdoelen.object:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        example: "Vakoverschrijdende"
+        enum:
+        - "Vak"
+        - "Vakoverschrijdende"
+        - "Leergebied"
+        - "Leergebiedoverschrijdende"
+        - "Domein"
+        - "Domeinoverschrijdende"
+        - "Pool"
+        - "Opleiding"
+      waarde:
+        type: "string"
+        example: "Leren Leren"
+  titels.object:
+    type: "object"
+    description: "titels"
+    properties:
+      "1":
+        $ref: "#/definitions/titel.object"
+      "2":
+        $ref: "#/definitions/titel.object"
+      "3":
+        $ref: "#/definitions/titel.object"
+      "4":
+        $ref: "#/definitions/titel.object"
+    required:
+    - "1"
+  ordeningskader.object:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        description: "het ordeningskader type"
+        example: "wetenschapsdomein_onderdeel"
+        enum:
+        - "bouwsteen"
+        - "wetenschapsdomein_onderdeel"
+      studierichtingen:
+        type: "array"
+        items:
+          $ref: "#/definitions/studierichting.object"
+  studierichting.object:
+    type: "object"
+    properties:
+      waarde:
+        type: "string"
+        example: "Wetenschappen-Wiskunde"
